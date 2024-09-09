@@ -1,0 +1,181 @@
+#include <stdio.h>
+#define true 1
+
+double soma(double a, double b) {
+    return a + b;
+}
+
+double subtracao(double a, double b) {
+    return a - b;
+}
+
+double multiplicacao(double a, double b) {
+    return a * b;
+}
+
+double divisao(double a, double b) {
+    return a / b;
+}
+
+double potenciacao(double base, double expoente) {
+    double resultado = 1;
+    for (int i = 0; i < expoente; i++) {
+        resultado *= base;
+    }
+    return resultado;
+}
+
+double raiz_quadrada(double valor) {
+    if (valor < 0) {
+        return -1; // Retorna -1 para indicar erro se o valor for negativo
+    }
+    double resultado = valor / 2;
+    double temp = 0;
+    while (resultado != temp) {
+        temp = resultado;
+        resultado = (valor / temp + temp) / 2;
+    }
+    return resultado;
+}
+
+long fatorial(int n) {
+    long resultado = 1;
+    for (int i = 1; i <= n; i++) {
+        resultado *= i;
+    }
+    return resultado;
+}
+
+int mdc(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int mmc(int a, int b) {
+    return (a * b) / mdc(a, b);
+}
+
+void resolver_equacao_segundo_grau(double a, double b, double c) {
+    double delta = b * b - 4 * a * c;
+    if (delta < 0) {
+        printf("Não há raízes reais.\n");
+        return;
+    }
+
+    double raiz_delta = raiz_quadrada(delta);
+    if (raiz_delta < 0) {
+        printf("Erro ao calcular a raiz quadrada.\n");
+        return;
+    }
+
+    double x1 = (-b + raiz_delta) / (2 * a);
+    double x2 = (-b - raiz_delta) / (2 * a);
+
+    printf("As raízes da equação são: %.5lf e %.5lf\n", x1, x2);
+}
+
+int main() {
+    int opc;
+    double val1, val2, resultado;
+    long resultado_fatorial;
+    int resultado_mdc, resultado_mmc;
+    
+    while(true) {
+        printf("Escolha a Operação: \n");
+        printf("0 - Sair \n");
+        printf("1 - Soma\n");
+        printf("2 - Subtração\n");
+        printf("3 - Multiplicação\n");
+        printf("4 - Divisão\n");
+        printf("5 - Potenciação\n");
+        printf("6 - Raiz Quadrada\n");
+        printf("7 - Fatorial\n");
+        printf("8 - MDC (Mínimo Divisor Comum)\n");
+        printf("9 - MMC (Mínimo Múltiplo Comum)\n");
+        printf("10 - Equação do Segundo Grau\n");
+        
+        scanf("%d", &opc);
+        
+        if (opc == 0) {
+            break;
+        }
+        
+        if (opc == 6) {
+            printf("Digite o valor para calcular a raiz quadrada: \n");
+            scanf("%lf", &val1);
+            resultado = raiz_quadrada(val1);
+            if (resultado >= 0) {
+                printf("O Resultado é: %.5lf \n\n\n\n", resultado);
+            } else {
+                printf("Erro: Valor negativo não permitido.\n\n\n\n");
+            }
+        } else if (opc == 7) {
+            int val;
+            printf("Digite um número inteiro para calcular o fatorial: \n");
+            scanf("%d", &val);
+            resultado_fatorial = fatorial(val);
+            printf("O Resultado é: %ld \n\n\n\n", resultado_fatorial);
+        } else if (opc == 8) {
+            int val1_int, val2_int;
+            printf("Digite o primeiro valor inteiro: \n");
+            scanf("%d", &val1_int);
+            printf("Digite o segundo valor inteiro: \n");
+            scanf("%d", &val2_int);
+            resultado_mdc = mdc(val1_int, val2_int);
+            printf("O Resultado é: %d \n\n\n\n", resultado_mdc);
+        } else if (opc == 9) {
+            int val1_int, val2_int;
+            printf("Digite o primeiro valor inteiro: \n");
+            scanf("%d", &val1_int);
+            printf("Digite o segundo valor inteiro: \n");
+            scanf("%d", &val2_int);
+            resultado_mmc = mmc(val1_int, val2_int);
+            printf("O Resultado é: %d \n\n\n\n", resultado_mmc);
+        } else if (opc == 10) {
+            double a, b, c;
+            printf("Digite os coeficientes da equação (a b c): \n");
+            scanf("%lf %lf %lf", &a, &b, &c);
+            resolver_equacao_segundo_grau(a, b, c);
+        } else {
+            printf("Digite o primeiro valor: \n");
+            scanf("%lf", &val1);
+        
+            printf("Digite o segundo valor: \n");
+            scanf("%lf", &val2);
+        
+            switch(opc) {
+                case 1:
+                    resultado = soma(val1, val2);
+                    break;
+                case 2:
+                    resultado = subtracao(val1, val2);
+                    break;
+                case 3:
+                    resultado = multiplicacao(val1, val2);
+                    break;
+                case 4:
+                    if (val2 != 0) {
+                        resultado = divisao(val1, val2);
+                    } else {
+                        printf("Erro: Divisão por zero não permitida.\n");
+                        continue;
+                    }
+                    break;
+                case 5:
+                    resultado = potenciacao(val1, val2);
+                    break;
+                default:
+                    printf("Opção inválida.\n");
+                    continue;
+            }
+            printf("O Resultado é: %.5lf \n\n\n\n", resultado);
+        }
+    }
+
+    printf("Obrigado por utilizar nosso sistema!");
+    
+    return 0;
