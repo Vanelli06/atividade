@@ -1,0 +1,50 @@
+#include<stdio.h>
+#define SIZE 10
+
+  int eh_primo(int num){
+  
+  if (num<2) return 0;
+    for int i=2; i*i<num; i++){
+	 if (num%i== 0) return 0;	
+	}
+	   return 
+	
+	int main (){
+	int numeros [SIZE], pares [SIZE], impares [SIZE]
+	  int_soma pares=0;
+	  int soma impares=0;
+	  int cont_pares=0, cont_impares=0;
+	
+	printf ("Digite 10 numeros inteiros"\n);
+	  for (int i=0; i<SIZE; i++);{
+	  
+	  scanf("%d",&numeros [i];
+	
+	if (numeros[i]%2==0){
+	  pares [cont_pares++]= numeros[i];
+	   soma_pares+=numeros[i];
+	 
+	}else{
+	
+	   impares [cont_impares++]= numeros[i];
+	   soma_impares+=numeros[i];
+	 }
+	   }
+ 	   printf("\n Numeros pares:");
+     for (int [i]=0;i<cont_pares;i++);
+     printf("%d", pares[i]);
+	 
+	     printf("\n\n Numeros impares:");
+     for (int [i]=0;i<cont_impares ;i++);
+     printf("%d", impares[i]);
+	 printf(\n Soma dos impares:%d, Soma_impares);
+    
+	  printf("\n\n Numeros primos:");
+     for (int i=0; i<SIZE; i++);{
+	if(eh_primo(numeros[i]));
+	  
+        printf("%d",numeros[i]);
+     }
+	   return 0;
+	 }
+  
